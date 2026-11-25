@@ -32,8 +32,15 @@ CAST = [
     dict(key="hoplite", name="hoplite-ios", at=(384, 48), hem=True, say="Unofficial iPhone app for cloud agents.",
          art=["....#########....", "..#############..", ".####.......####.", ".##..#######..##.", ".#.###########.#.", "..#############..", "..#############..", "..##ooo###ooo##..",
               "..##oooo#oooo##..", "..###ooo#ooo###..", "..######o######..", "..####ooooo####..", "..#####ooo#####..", "..#####ooo#####.."]),
+    dict(key="cmake", name="cmake-rust", at=(0, 0), hero=False, hem=True, say="CMake, rebuilt in Rust. Byte-identical on LLVM.",
+         art=["#.#.........#.#", "###.........###", ".#...#####...#.", ".#.#########.#.", "..###########..", ".#############.", "###oo#####oo###",
+              "###oo#####oo###", "###############", "#####o###o#####", "######ooo######", "###############", "###############"]),
+    dict(key="phonebench", name="PhoneBench", at=(0, 0), hero=False, hem=True, say="Benchmarks AI agents on a real iPhone.",
+         art=["....#######....", "..###########..", ".#############.", "###############", "###oo#####oo###", "###oo#####oo###", "###############",
+              "###########o###", "#######o###o###", "###o###o###o###", "###o###o###o###", "###############", "###############"]),
 ]
 LINKS_AT = {}
+HERO = [c for c in CAST if c.get("hero", True)]   # the scene has six places
 
 
 def epx(g):
@@ -208,7 +215,7 @@ def edge_mask():
 # ---------- hero ----------
 def hero(theme):
     T0, STEP = 2.0, 3.0
-    n = len(CAST)
+    n = len(HERO)
     END = T0 + STEP * n                       # moon wakes up
     DUR = END + 9.0
     N = round(DUR * FPS)
@@ -265,7 +272,7 @@ def hero(theme):
     ring[1, 1] = ring[1, 5] = ring[5, 1] = ring[5, 5] = True
     orb = png(orb_l, ring, theme=theme)
     pos = {}
-    for i, c in enumerate(CAST):
+    for i, c in enumerate(HERO):
         fr = [sprite(c, f) for f in range(4)]
         sh, sw = fr[0][0].shape
         uri = png(stack([f[0] for f in fr]), stack([f[1] for f in fr]), theme=theme)
